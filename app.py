@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
+from datetime import datetime, timedelta
 
 # Set page config
 st.set_page_config(
@@ -31,10 +32,19 @@ with st.sidebar:
 	) / 100  # Convert to decimal
 	
 	ev_ebitda_multiple = st.number_input(
-		'Starting EV/EBITDA Multiple',
+		'Entry EV/EBITDA Multiple',
 		min_value=0.0,
 		max_value=100.0,
 		value=10.0,
+		step=1.0,
+		format='%.1f'
+	)
+	
+	exit_multiple = st.number_input(
+		'Exit EV/EBITDA Multiple',
+		min_value=0.0,
+		max_value=100.0,
+		value=12.0,
 		step=1.0,
 		format='%.1f'
 	)
@@ -74,8 +84,13 @@ try:
 	# Calculate projected EBITDA
 	projected_ebitda = projected_revenue * ebitda_margin
 	
-	# Calculate entry EV
+	# Calculate entry and exit EV
 	entry_ev = projected_ebitda[0] * ev_ebitda_multiple
+	exit_ev = projected_ebitda[-1] * exit_multiple
+	
+	# Calculate return metrics
+	return_multiple = exit_ev / entry_ev
+	irr = (return_multiple ** (1/years) - 1) * 100
 	
 	# Create DataFrame for plotting
 	df = pd.DataFrame({
@@ -100,7 +115,8 @@ try:
 		paper_bgcolor='white',
 		showlegend=False,
 		uniformtext_minsize=8,
-		uniformtext_mode='hide'
+		uniformtext_mode='hide',
+		xaxis=dict(tickmode='linear', tick0=0, dtick=1)
 	)
 	
 	# Create EBITDA chart
@@ -119,7 +135,8 @@ try:
 		paper_bgcolor='white',
 		showlegend=False,
 		uniformtext_minsize=8,
-		uniformtext_mode='hide'
+		uniformtext_mode='hide',
+		xaxis=dict(tickmode='linear', tick0=0, dtick=1)
 	)
 	
 	# Display the charts side by side
@@ -166,6 +183,28 @@ try:
 		st.metric(
 			'Entry EV',
 			f'${entry_ev/1_000_000:.1f}M'
+		)
+	
+	# Display return metrics
+	st.header('Return Metrics')
+	col1, col2, col3 = st.columns(3)
+	
+	with col1:
+		st.metric(
+			'Exit EV',
+			f'${exit_ev/1_000_000:.1f}M'
+		)
+	
+	with col2:
+		st.metric(
+			'Return Multiple',
+			f'{return_multiple:.1f}x'
+		)
+	
+	with col3:
+		st.metric(
+			'IRR',
+			f'{irr:.1f}%'
 		)
 
 except Exception as e:
