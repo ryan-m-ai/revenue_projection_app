@@ -14,18 +14,31 @@ st.set_page_config(
 with st.sidebar:
 	st.header('Input Parameters')
 	starting_revenue = st.number_input(
-		'Starting Revenue ($)',
+		'Starting Revenue ($M)',
 		min_value=0.0,
-		value=100000.0,
-		step=10000.0
-	)
+		value=1.0,
+		step=0.1,
+		format='%.1f'
+	) * 1_000_000  # Convert to actual dollars
+	
+	ebitda_margin = st.number_input(
+		'Starting EBITDA Margin (%)',
+		min_value=0.0,
+		max_value=100.0,
+		value=20.0,
+		step=1.0,
+		format='%.1f'
+	) / 100  # Convert to decimal
+	
 	growth_rate = st.number_input(
 		'Annual Growth Rate (%)',
 		min_value=-100.0,
 		max_value=1000.0,
 		value=10.0,
-		step=1.0
-	)
+		step=1.0,
+		format='%.1f'
+	) / 100  # Convert to decimal
+	
 	years = st.number_input(
 		'Projection Period (Years)',
 		min_value=1,
@@ -37,29 +50,30 @@ with st.sidebar:
 # Main content
 st.title('Revenue Projection Calculator')
 st.markdown('''
-	This app helps you project future revenue based on your assumptions.
+	This app helps you project future revenue and EBITDA based on your assumptions.
 	Adjust the parameters in the sidebar to see different projections.
 ''')
 
 # Calculate projections
 try:
-	# Convert growth rate to decimal
-	growth_rate_decimal = growth_rate / 100
-	
 	# Create year array
 	year_array = np.arange(0, years + 1)
 	
 	# Calculate projected revenue using compound growth formula
-	projected_revenue = starting_revenue * (1 + growth_rate_decimal) ** year_array
+	projected_revenue = starting_revenue * (1 + growth_rate) ** year_array
+	
+	# Calculate projected EBITDA
+	projected_ebitda = projected_revenue * ebitda_margin
 	
 	# Create DataFrame for plotting
 	df = pd.DataFrame({
 		'Year': year_array,
-		'Revenue': projected_revenue
+		'Revenue': projected_revenue,
+		'EBITDA': projected_ebitda
 	})
 	
-	# Create line chart
-	fig = px.line(
+	# Create revenue chart
+	fig_revenue = px.bar(
 		df,
 		x='Year',
 		y='Revenue',
@@ -67,34 +81,63 @@ try:
 		labels={'Revenue': 'Revenue ($)', 'Year': 'Years from Start'}
 	)
 	
-	# Update layout for better readability
-	fig.update_layout(
+	# Update revenue chart layout
+	fig_revenue.update_layout(
 		plot_bgcolor='white',
 		paper_bgcolor='white',
 		showlegend=False
 	)
 	
-	# Display the chart
-	st.plotly_chart(fig, use_container_width=True)
+	# Create EBITDA chart
+	fig_ebitda = px.bar(
+		df,
+		x='Year',
+		y='EBITDA',
+		title='EBITDA Projection Over Time',
+		labels={'EBITDA': 'EBITDA ($)', 'Year': 'Years from Start'}
+	)
+	
+	# Update EBITDA chart layout
+	fig_ebitda.update_layout(
+		plot_bgcolor='white',
+		paper_bgcolor='white',
+		showlegend=False
+	)
+	
+	# Display the charts side by side
+	col1, col2 = st.columns(2)
+	
+	with col1:
+		st.plotly_chart(fig_revenue, use_container_width=True)
+	
+	with col2:
+		st.plotly_chart(fig_ebitda, use_container_width=True)
 	
 	# Display summary statistics
 	st.header('Summary Statistics')
-	col1, col2, col3 = st.columns(3)
+	col1, col2, col3, col4 = st.columns(4)
 	
 	with col1:
 		st.metric(
 			'Starting Revenue',
-			f'${starting_revenue:,.2f}'
+			f'${starting_revenue/1_000_000:.1f}M'
 		)
 	
 	with col2:
 		final_revenue = projected_revenue[-1]
 		st.metric(
 			'Final Projected Revenue',
-			f'${final_revenue:,.2f}'
+			f'${final_revenue/1_000_000:.1f}M'
 		)
 	
 	with col3:
+		final_ebitda = projected_ebitda[-1]
+		st.metric(
+			'Final Projected EBITDA',
+			f'${final_ebitda/1_000_000:.1f}M'
+		)
+	
+	with col4:
 		total_growth = ((final_revenue - starting_revenue) / starting_revenue) * 100
 		st.metric(
 			'Total Growth',
