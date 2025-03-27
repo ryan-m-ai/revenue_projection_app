@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 # Set page config
 st.set_page_config(
-	page_title='Revenue Projection App',
+	page_title='Return Calculator',
 	page_icon='💰',
 	layout='wide'
 )
@@ -77,11 +77,7 @@ with st.sidebar:
 	)
 
 # Main content
-st.title('Revenue Projection Calculator')
-st.markdown('''
-	This app helps you project future revenue and EBITDA based on your assumptions.
-	Adjust the parameters in the sidebar to see different projections.
-''')
+st.title('Return Calculator')
 
 # Calculate projections
 try:
@@ -110,6 +106,50 @@ try:
 		'EBITDA': projected_ebitda,
 		'EBITDA Margin': ebitda_margins * 100  # Convert to percentage for display
 	})
+	
+	# Display metrics in three boxes
+	col1, col2, col3 = st.columns(3)
+	
+	with col1:
+		st.subheader('Entry')
+		st.metric(
+			'Revenue',
+			f'${starting_revenue/1_000_000:.1f}M'
+		)
+		st.metric(
+			'EBITDA',
+			f'${projected_ebitda[0]/1_000_000:.1f}M'
+		)
+		st.metric(
+			'EBITDA Margin',
+			f'{ebitda_margins[0]*100:.1f}%'
+		)
+	
+	with col2:
+		st.subheader('Exit')
+		st.metric(
+			'Revenue',
+			f'${projected_revenue[-1]/1_000_000:.1f}M'
+		)
+		st.metric(
+			'EBITDA',
+			f'${projected_ebitda[-1]/1_000_000:.1f}M'
+		)
+		st.metric(
+			'EBITDA Margin',
+			f'{ebitda_margins[-1]*100:.1f}%'
+		)
+	
+	with col3:
+		st.subheader('Return')
+		st.metric(
+			'Return Multiple',
+			f'{return_multiple:.1f}x'
+		)
+		st.metric(
+			'IRR',
+			f'{irr:.1f}%'
+		)
 	
 	# Create revenue chart
 	fig_revenue = px.bar(
@@ -159,65 +199,6 @@ try:
 	
 	with col2:
 		st.plotly_chart(fig_ebitda, use_container_width=True)
-	
-	# Display summary statistics
-	st.header('Summary Statistics')
-	col1, col2, col3, col4, col5 = st.columns(5)
-	
-	with col1:
-		st.metric(
-			'Starting Revenue',
-			f'${starting_revenue/1_000_000:.1f}M'
-		)
-	
-	with col2:
-		final_revenue = projected_revenue[-1]
-		st.metric(
-			'Final Projected Revenue',
-			f'${final_revenue/1_000_000:.1f}M'
-		)
-	
-	with col3:
-		final_ebitda = projected_ebitda[-1]
-		st.metric(
-			'Final Projected EBITDA',
-			f'${final_ebitda/1_000_000:.1f}M'
-		)
-	
-	with col4:
-		total_growth = ((final_revenue - starting_revenue) / starting_revenue) * 100
-		st.metric(
-			'Total Growth',
-			f'{total_growth:.1f}%'
-		)
-	
-	with col5:
-		st.metric(
-			'Entry EV',
-			f'${entry_ev/1_000_000:.1f}M'
-		)
-	
-	# Display return metrics
-	st.header('Return Metrics')
-	col1, col2, col3 = st.columns(3)
-	
-	with col1:
-		st.metric(
-			'Exit EV',
-			f'${exit_ev/1_000_000:.1f}M'
-		)
-	
-	with col2:
-		st.metric(
-			'Return Multiple',
-			f'{return_multiple:.1f}x'
-		)
-	
-	with col3:
-		st.metric(
-			'IRR',
-			f'{irr:.1f}%'
-		)
 
 except Exception as e:
 	st.error(f'An error occurred: {str(e)}')
