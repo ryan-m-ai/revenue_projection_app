@@ -8,8 +8,35 @@ from datetime import datetime, timedelta
 st.set_page_config(
 	page_title='Return Calculator',
 	page_icon='💰',
-	layout='wide'
+	layout='wide',
+	initial_sidebar_state='expanded'
 )
+
+# Custom CSS
+st.markdown("""
+	<style>
+	.main {
+		padding: 2rem;
+	}
+	.stMetric {
+		background-color: #f0f2f6;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		margin-bottom: 1rem;
+	}
+	.stMetric:hover {
+		background-color: #e6e9ef;
+	}
+	.stSubheader {
+		font-size: 1.2rem;
+		font-weight: 600;
+		color: #1f1f1f;
+		margin-bottom: 1rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 2px solid #e6e9ef;
+	}
+	</style>
+""", unsafe_allow_html=True)
 
 # Sidebar inputs
 with st.sidebar:
@@ -40,6 +67,7 @@ with st.sidebar:
 		format='%.1f'
 	)
 	
+	st.markdown('---')
 	st.header('Exit Assumptions')
 	years = st.number_input(
 		'Projection Period (Years)',
@@ -78,6 +106,7 @@ with st.sidebar:
 
 # Main content
 st.title('Return Calculator')
+st.markdown('---')
 
 # Calculate projections
 try:
@@ -111,7 +140,7 @@ try:
 	col1, col2, col3 = st.columns(3)
 	
 	with col1:
-		st.subheader('Entry')
+		st.markdown('### Entry')
 		st.metric(
 			'Revenue',
 			f'${starting_revenue/1_000_000:.1f}M'
@@ -126,7 +155,7 @@ try:
 		)
 	
 	with col2:
-		st.subheader('Exit')
+		st.markdown('### Exit')
 		st.metric(
 			'Revenue',
 			f'${projected_revenue[-1]/1_000_000:.1f}M'
@@ -141,7 +170,7 @@ try:
 		)
 	
 	with col3:
-		st.subheader('Return')
+		st.markdown('### Return')
 		st.metric(
 			'Return Multiple',
 			f'{return_multiple:.1f}x'
@@ -150,6 +179,8 @@ try:
 			'IRR',
 			f'{irr:.1f}%'
 		)
+	
+	st.markdown('---')
 	
 	# Create revenue chart
 	fig_revenue = px.bar(
@@ -168,7 +199,9 @@ try:
 		showlegend=False,
 		uniformtext_minsize=8,
 		uniformtext_mode='hide',
-		xaxis=dict(tickmode='linear', tick0=0, dtick=1)
+		xaxis=dict(tickmode='linear', tick0=0, dtick=1),
+		height=400,
+		margin=dict(t=30, b=30, l=30, r=30)
 	)
 	
 	# Create EBITDA chart
@@ -188,7 +221,9 @@ try:
 		showlegend=False,
 		uniformtext_minsize=8,
 		uniformtext_mode='hide',
-		xaxis=dict(tickmode='linear', tick0=0, dtick=1)
+		xaxis=dict(tickmode='linear', tick0=0, dtick=1),
+		height=400,
+		margin=dict(t=30, b=30, l=30, r=30)
 	)
 	
 	# Display the charts side by side
