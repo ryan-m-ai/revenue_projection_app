@@ -30,6 +30,15 @@ with st.sidebar:
 		format='%.1f'
 	) / 100  # Convert to decimal
 	
+	ev_ebitda_multiple = st.number_input(
+		'Starting EV/EBITDA Multiple',
+		min_value=0.0,
+		max_value=100.0,
+		value=10.0,
+		step=1.0,
+		format='%.1f'
+	)
+	
 	growth_rate = st.number_input(
 		'Annual Growth Rate (%)',
 		min_value=-100.0,
@@ -65,6 +74,9 @@ try:
 	# Calculate projected EBITDA
 	projected_ebitda = projected_revenue * ebitda_margin
 	
+	# Calculate entry EV
+	entry_ev = projected_ebitda[0] * ev_ebitda_multiple
+	
 	# Create DataFrame for plotting
 	df = pd.DataFrame({
 		'Year': year_array,
@@ -78,14 +90,17 @@ try:
 		x='Year',
 		y='Revenue',
 		title='Revenue Projection Over Time',
-		labels={'Revenue': 'Revenue ($)', 'Year': 'Years from Start'}
+		labels={'Revenue': 'Revenue ($)', 'Year': 'Years from Start'},
+		text=df['Revenue'].apply(lambda x: f'${x/1_000_000:.1f}M')
 	)
 	
 	# Update revenue chart layout
 	fig_revenue.update_layout(
 		plot_bgcolor='white',
 		paper_bgcolor='white',
-		showlegend=False
+		showlegend=False,
+		uniformtext_minsize=8,
+		uniformtext_mode='hide'
 	)
 	
 	# Create EBITDA chart
@@ -94,14 +109,17 @@ try:
 		x='Year',
 		y='EBITDA',
 		title='EBITDA Projection Over Time',
-		labels={'EBITDA': 'EBITDA ($)', 'Year': 'Years from Start'}
+		labels={'EBITDA': 'EBITDA ($)', 'Year': 'Years from Start'},
+		text=df['EBITDA'].apply(lambda x: f'${x/1_000_000:.1f}M')
 	)
 	
 	# Update EBITDA chart layout
 	fig_ebitda.update_layout(
 		plot_bgcolor='white',
 		paper_bgcolor='white',
-		showlegend=False
+		showlegend=False,
+		uniformtext_minsize=8,
+		uniformtext_mode='hide'
 	)
 	
 	# Display the charts side by side
@@ -115,7 +133,7 @@ try:
 	
 	# Display summary statistics
 	st.header('Summary Statistics')
-	col1, col2, col3, col4 = st.columns(4)
+	col1, col2, col3, col4, col5 = st.columns(5)
 	
 	with col1:
 		st.metric(
@@ -142,6 +160,12 @@ try:
 		st.metric(
 			'Total Growth',
 			f'{total_growth:.1f}%'
+		)
+	
+	with col5:
+		st.metric(
+			'Entry EV',
+			f'${entry_ev/1_000_000:.1f}M'
 		)
 
 except Exception as e:
