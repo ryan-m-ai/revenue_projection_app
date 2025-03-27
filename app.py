@@ -13,7 +13,7 @@ st.set_page_config(
 
 # Sidebar inputs
 with st.sidebar:
-	st.header('Input Parameters')
+	st.header('Entry Assumptions')
 	starting_revenue = st.number_input(
 		'Starting Revenue ($M)',
 		min_value=0.0,
@@ -40,17 +40,17 @@ with st.sidebar:
 		format='%.1f'
 	)
 	
-	exit_multiple = st.number_input(
-		'Exit EV/EBITDA Multiple',
-		min_value=0.0,
-		max_value=100.0,
-		value=12.0,
-		step=1.0,
-		format='%.1f'
+	st.header('Exit Assumptions')
+	years = st.number_input(
+		'Projection Period (Years)',
+		min_value=1,
+		max_value=50,
+		value=5,
+		step=1
 	)
 	
 	growth_rate = st.number_input(
-		'Annual Growth Rate (%)',
+		'Annual Revenue Growth (%)',
 		min_value=-100.0,
 		max_value=1000.0,
 		value=10.0,
@@ -58,12 +58,22 @@ with st.sidebar:
 		format='%.1f'
 	) / 100  # Convert to decimal
 	
-	years = st.number_input(
-		'Projection Period (Years)',
-		min_value=1,
-		max_value=50,
-		value=5,
-		step=1
+	margin_improvement = st.number_input(
+		'Annual EBITDA Margin Improvement (%)',
+		min_value=-100.0,
+		max_value=100.0,
+		value=1.0,
+		step=0.5,
+		format='%.1f'
+	) / 100  # Convert to decimal
+	
+	exit_multiple = st.number_input(
+		'Exit EV/EBITDA Multiple',
+		min_value=0.0,
+		max_value=100.0,
+		value=12.0,
+		step=1.0,
+		format='%.1f'
 	)
 
 # Main content
@@ -81,8 +91,9 @@ try:
 	# Calculate projected revenue using compound growth formula
 	projected_revenue = starting_revenue * (1 + growth_rate) ** year_array
 	
-	# Calculate projected EBITDA
-	projected_ebitda = projected_revenue * ebitda_margin
+	# Calculate projected EBITDA with margin improvement
+	ebitda_margins = ebitda_margin * (1 + margin_improvement) ** year_array
+	projected_ebitda = projected_revenue * ebitda_margins
 	
 	# Calculate entry and exit EV
 	entry_ev = projected_ebitda[0] * ev_ebitda_multiple
@@ -96,7 +107,8 @@ try:
 	df = pd.DataFrame({
 		'Year': year_array,
 		'Revenue': projected_revenue,
-		'EBITDA': projected_ebitda
+		'EBITDA': projected_ebitda,
+		'EBITDA Margin': ebitda_margins * 100  # Convert to percentage for display
 	})
 	
 	# Create revenue chart
