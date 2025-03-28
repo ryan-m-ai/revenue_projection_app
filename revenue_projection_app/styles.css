@@ -1,0 +1,108 @@
+.main {
+	padding: 1rem;
+}
+
+.stMarkdown {
+	font-size: 0.875rem;
+}
+
+/* Style for metric values */
+.stMarkdown p {
+	margin: 0;
+	padding: 0.125rem;
+	height: 1.5rem;
+	min-height: 1.5rem;
+	max-height: 1.5rem;
+	display: flex;
+	align-items: center;
+	font-size: 0.875rem;
+	background-color: #f8f9fa;
+	border-radius: 0.25rem;
+}
+
+/* Style for metric headers */
+.stMarkdown h3 {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #1f1f1f;
+	margin-bottom: 0.25rem;
+	padding-bottom: 0.125rem;
+	border-bottom: 1px solid #e6e9ef;
+	height: 1.5rem;
+	display: flex;
+	align-items: center;
+}
+
+/* Style for dividers */
+hr {
+	margin: 0.125rem 0;
+	border: none;
+	border-top: 1px solid #e6e9ef;
+	height: 1.5rem;
+	display: flex;
+	align-items: center;
+}
+
+/* Style for right-aligned columns */
+.right-align {
+	text-align: right;
+	justify-content: flex-end;
+	height: 1.5rem;
+	display: flex;
+	align-items: center;
+}
+
+/* Style for charts */
+.js-plotly-plot {
+	background-color: white !important;
+}
+
+/* Style for dataframe */
+.dataframe {
+	background-color: white;
+	border: 1px solid #e6e9ef;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	font-size: 0.875rem;
+}
+
+/* Style for sidebar */
+.css-1d391kg {
+	background-color: #f8f9fa;
+	padding: 1rem;
+}
+
+/* Style for number inputs */
+.stNumberInput input {
+	background-color: white;
+	border: 1px solid #e6e9ef;
+	border-radius: 0.25rem;
+	padding: 0.25rem;
+	font-size: 0.875rem;
+}
+
+/* Style for headers */
+h1 {
+	color: #1f1f1f;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+}
+
+/* Style for error messages */
+.stAlert {
+	background-color: #fff5f5;
+	border: 1px solid #feb2b2;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	font-size: 0.875rem;
+}
+
+/* Style for info messages */
+.stInfo {
+	background-color: #f0f9ff;
+	border: 1px solid #bae6fd;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	font-size: 0.875rem;
+} 
