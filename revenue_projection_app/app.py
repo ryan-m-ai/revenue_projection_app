@@ -1,6 +1,6 @@
 import streamlit as st
-from ui import load_css, render_sidebar, render_metrics, render_charts, render_sensitivity
-from calculations import calculate_projections, calculate_sensitivity
+from revenue_projection_app.ui import load_css, render_sidebar, render_metrics, render_charts, render_sensitivity
+from revenue_projection_app.calculations import calculate_projections, calculate_sensitivity
 
 # Set page config
 st.set_page_config(
