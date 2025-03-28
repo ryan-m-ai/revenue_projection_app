@@ -162,8 +162,8 @@ try:
 	# Calculate projections
 	df = pd.DataFrame({
 		'Year': range(years + 1),
-		'Revenue': starting_revenue * (1 + growth_rate/100) ** range(years + 1),
-		'EBITDA': starting_revenue * (1 + growth_rate/100) ** range(years + 1) * (ebitda_margin/100)
+		'Revenue': starting_revenue * (1 + growth_rate/100) ** list(range(years + 1)),
+		'EBITDA': starting_revenue * (1 + growth_rate/100) ** list(range(years + 1)) * (ebitda_margin/100)
 	})
 
 	# Calculate entry metrics
