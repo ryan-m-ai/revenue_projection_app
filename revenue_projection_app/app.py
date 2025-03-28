@@ -20,9 +20,10 @@ st.markdown("""
 	}
 	.stMetric {
 		background-color: #f0f2f6;
-		padding: 1rem;
+		padding: 0.5rem;
 		border-radius: 0.5rem;
-		margin-bottom: 1rem;
+		margin-bottom: 0.5rem;
+		font-size: 0.75rem;
 	}
 	.stMetric:hover {
 		background-color: #e6e9ef;
@@ -31,7 +32,7 @@ st.markdown("""
 		font-size: 1.2rem;
 		font-weight: 600;
 		color: #1f1f1f;
-		margin-bottom: 1rem;
+		margin-bottom: 0.5rem;
 		padding-bottom: 0.5rem;
 		border-bottom: 2px solid #e6e9ef;
 	}
