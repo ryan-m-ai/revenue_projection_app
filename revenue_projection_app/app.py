@@ -48,9 +48,9 @@ st.markdown("""
 	.stMarkdown p {
 		margin: 0;
 		padding: 0.125rem;
-		height: 1.25rem;
-		min-height: 1.25rem;
-		max-height: 1.25rem;
+		height: 1.5rem;
+		min-height: 1.5rem;
+		max-height: 1.5rem;
 		display: flex;
 		align-items: center;
 		font-size: 0.875rem;
@@ -65,12 +65,18 @@ st.markdown("""
 		margin-bottom: 0.25rem;
 		padding-bottom: 0.125rem;
 		border-bottom: 1px solid #e6e9ef;
+		height: 1.5rem;
+		display: flex;
+		align-items: center;
 	}
 	/* Style for dividers */
 	hr {
 		margin: 0.125rem 0;
 		border: none;
 		border-top: 1px solid #e6e9ef;
+		height: 1.5rem;
+		display: flex;
+		align-items: center;
 	}
 	/* Style for charts */
 	.js-plotly-plot {
@@ -136,6 +142,9 @@ st.markdown("""
 	.right-align {
 		text-align: right;
 		justify-content: flex-end;
+		height: 1.5rem;
+		display: flex;
+		align-items: center;
 	}
 	</style>
 """, unsafe_allow_html=True)
