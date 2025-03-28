@@ -68,7 +68,7 @@ st.markdown("""
 	}
 	/* Style for dividers */
 	hr {
-		margin: 1rem 0;
+		margin: 0.25rem 0;
 		border: none;
 		border-top: 1px solid #e6e9ef;
 	}
@@ -131,6 +131,11 @@ st.markdown("""
 		height: 1.5rem;
 		display: flex;
 		align-items: center;
+	}
+	/* Style for right-aligned columns */
+	.right-align {
+		text-align: right;
+		justify-content: flex-end;
 	}
 	</style>
 """, unsafe_allow_html=True)
@@ -323,12 +328,15 @@ try:
 		st.markdown('Revenue')
 		st.markdown('EBITDA')
 		st.markdown('EBITDA Margin')
+		st.markdown('<hr>', unsafe_allow_html=True)
 		st.markdown('EV')
 		st.markdown('EV/Revenue')
 		st.markdown('EV/EBITDA')
+		st.markdown('<hr>', unsafe_allow_html=True)
 		st.markdown('Net Debt')
 		st.markdown('Equity')
 		st.markdown('Transaction Fees')
+		st.markdown('<hr>', unsafe_allow_html=True)
 		st.markdown('Return Multiple')
 		st.markdown('IRR')
 		st.markdown('CAGR')
@@ -336,35 +344,41 @@ try:
 	
 	with col2:
 		st.markdown('### Entry')
-		st.markdown(f'${starting_revenue/1_000_000:.1f}M')
-		st.markdown(f'${projected_ebitda[0]/1_000_000:.1f}M')
-		st.markdown(f'{ebitda_margins[0]*100:.1f}%')
-		st.markdown(f'${entry_ev/1_000_000:.1f}M')
-		st.markdown(f'{entry_ev_revenue:.1f}x')
-		st.markdown(f'{ev_ebitda_multiple:.1f}x')
-		st.markdown(f'${net_debt_entry/1_000_000:.1f}M')
-		st.markdown(f'${entry_equity/1_000_000:.1f}M')
-		st.markdown(f'${entry_fees/1_000_000:.1f}M')
-		st.markdown(f'{return_multiple:.1f}x')
-		st.markdown(f'{irr:.1f}%')
-		st.markdown(f'{revenue_cagr:.1f}%')
-		st.markdown(f'${revenue_growth/1_000_000:.1f}M')
+		st.markdown(f'<div class="right-align">${starting_revenue/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${projected_ebitda[0]/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{ebitda_margins[0]*100:.1f}%</div>', unsafe_allow_html=True)
+		st.markdown('<hr>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${entry_ev/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{entry_ev_revenue:.1f}x</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{ev_ebitda_multiple:.1f}x</div>', unsafe_allow_html=True)
+		st.markdown('<hr>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${net_debt_entry/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${entry_equity/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${entry_fees/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown('<hr>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{return_multiple:.1f}x</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{irr:.1f}%</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{revenue_cagr:.1f}%</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${revenue_growth/1_000_000:.1f}M</div>', unsafe_allow_html=True)
 	
 	with col3:
 		st.markdown('### Exit')
-		st.markdown(f'${projected_revenue[-1]/1_000_000:.1f}M')
-		st.markdown(f'${projected_ebitda[-1]/1_000_000:.1f}M')
-		st.markdown(f'{ebitda_margins[-1]*100:.1f}%')
-		st.markdown(f'${exit_ev/1_000_000:.1f}M')
-		st.markdown(f'{exit_ev_revenue:.1f}x')
-		st.markdown(f'{exit_multiple:.1f}x')
-		st.markdown(f'${net_debt_exit/1_000_000:.1f}M')
-		st.markdown(f'${exit_equity/1_000_000:.1f}M')
-		st.markdown(f'${exit_fees/1_000_000:.1f}M')
-		st.markdown(f'{return_multiple:.1f}x')
-		st.markdown(f'{irr:.1f}%')
-		st.markdown(f'{ebitda_cagr:.1f}%')
-		st.markdown(f'${ebitda_growth/1_000_000:.1f}M')
+		st.markdown(f'<div class="right-align">${projected_revenue[-1]/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${projected_ebitda[-1]/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{ebitda_margins[-1]*100:.1f}%</div>', unsafe_allow_html=True)
+		st.markdown('<hr>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${exit_ev/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{exit_ev_revenue:.1f}x</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{exit_multiple:.1f}x</div>', unsafe_allow_html=True)
+		st.markdown('<hr>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${net_debt_exit/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${exit_equity/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${exit_fees/1_000_000:.1f}M</div>', unsafe_allow_html=True)
+		st.markdown('<hr>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{return_multiple:.1f}x</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{irr:.1f}%</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">{ebitda_cagr:.1f}%</div>', unsafe_allow_html=True)
+		st.markdown(f'<div class="right-align">${ebitda_growth/1_000_000:.1f}M</div>', unsafe_allow_html=True)
 	
 	st.markdown('---')
 	
