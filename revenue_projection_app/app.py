@@ -23,7 +23,7 @@ st.markdown("""
 		padding: 0.25rem;
 		border-radius: 0.25rem;
 		margin-bottom: 0.25rem;
-		font-size: 0.75rem;
+		font-size: 0.875rem;
 		height: 1.5rem;
 		display: flex;
 		align-items: center;
@@ -38,6 +38,9 @@ st.markdown("""
 		margin-bottom: 0.25rem;
 		padding-bottom: 0.25rem;
 		border-bottom: 1px solid #e6e9ef;
+	}
+	.stMarkdown {
+		font-size: 0.875rem;
 	}
 	</style>
 """, unsafe_allow_html=True)
