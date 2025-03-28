@@ -27,6 +27,8 @@ st.markdown("""
 		display: flex;
 		align-items: center;
 		border-radius: 0.25rem;
+		min-height: 1.5rem;
+		max-height: 1.5rem;
 	}
 	.stMetric:hover {
 		background-color: #f0f2f6;
@@ -47,6 +49,8 @@ st.markdown("""
 		margin: 0;
 		padding: 0.25rem;
 		height: 1.5rem;
+		min-height: 1.5rem;
+		max-height: 1.5rem;
 		display: flex;
 		align-items: center;
 		font-size: 0.875rem;
@@ -117,10 +121,14 @@ st.markdown("""
 	/* Style for metric labels */
 	.stMetric [data-testid="stMetricLabel"] {
 		font-size: 0.875rem;
+		display: none;
 	}
 	/* Style for metric values */
 	.stMetric [data-testid="stMetricValue"] {
 		font-size: 0.875rem;
+		height: 1.5rem;
+		display: flex;
+		align-items: center;
 	}
 	</style>
 """, unsafe_allow_html=True)
