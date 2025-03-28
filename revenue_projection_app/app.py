@@ -19,16 +19,17 @@ st.markdown("""
 		padding: 2rem;
 	}
 	.stMetric {
-		background-color: transparent;
+		background-color: #f8f9fa;
 		padding: 0.25rem;
 		margin-bottom: 0.25rem;
 		font-size: 0.875rem;
 		height: 1.5rem;
 		display: flex;
 		align-items: center;
+		border-radius: 0.25rem;
 	}
 	.stMetric:hover {
-		background-color: transparent;
+		background-color: #f0f2f6;
 	}
 	.stSubheader {
 		font-size: 1rem;
@@ -48,6 +49,7 @@ st.markdown("""
 		height: 1.5rem;
 		display: flex;
 		align-items: center;
+		font-size: 0.875rem;
 	}
 	/* Style for metric headers */
 	.stMarkdown h3 {
@@ -74,6 +76,7 @@ st.markdown("""
 		border: 1px solid #e6e9ef;
 		border-radius: 0.5rem;
 		padding: 1rem;
+		font-size: 0.875rem;
 	}
 	/* Style for sidebar */
 	.css-1d391kg {
@@ -86,12 +89,14 @@ st.markdown("""
 		border: 1px solid #e6e9ef;
 		border-radius: 0.25rem;
 		padding: 0.25rem;
+		font-size: 0.875rem;
 	}
 	/* Style for headers */
 	h1 {
 		color: #1f1f1f;
 		font-weight: 600;
 		margin-bottom: 1rem;
+		font-size: 1.5rem;
 	}
 	/* Style for error messages */
 	.stAlert {
@@ -99,6 +104,7 @@ st.markdown("""
 		border: 1px solid #feb2b2;
 		border-radius: 0.5rem;
 		padding: 1rem;
+		font-size: 0.875rem;
 	}
 	/* Style for info messages */
 	.stInfo {
@@ -106,6 +112,15 @@ st.markdown("""
 		border: 1px solid #bae6fd;
 		border-radius: 0.5rem;
 		padding: 1rem;
+		font-size: 0.875rem;
+	}
+	/* Style for metric labels */
+	.stMetric [data-testid="stMetricLabel"] {
+		font-size: 0.875rem;
+	}
+	/* Style for metric values */
+	.stMetric [data-testid="stMetricValue"] {
+		font-size: 0.875rem;
 	}
 	</style>
 """, unsafe_allow_html=True)
