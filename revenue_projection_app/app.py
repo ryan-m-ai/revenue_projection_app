@@ -41,6 +41,16 @@ st.markdown("""
 	}
 	.stMarkdown {
 		font-size: 0.875rem;
+		background-color: #f0f2f6;
+		padding: 0.25rem;
+		border-radius: 0.25rem;
+		margin-bottom: 0.25rem;
+		height: 1.5rem;
+		display: flex;
+		align-items: center;
+	}
+	.stMarkdown:hover {
+		background-color: #e6e9ef;
 	}
 	</style>
 """, unsafe_allow_html=True)
@@ -246,35 +256,35 @@ try:
 	
 	with col2:
 		st.markdown('### Entry')
-		st.metric('', f'${starting_revenue/1_000_000:.1f}M')
-		st.metric('', f'${projected_ebitda[0]/1_000_000:.1f}M')
-		st.metric('', f'{ebitda_margins[0]*100:.1f}%')
-		st.metric('', f'${entry_ev/1_000_000:.1f}M')
-		st.metric('', f'{entry_ev_revenue:.1f}x')
-		st.metric('', f'{ev_ebitda_multiple:.1f}x')
-		st.metric('', f'${net_debt_entry/1_000_000:.1f}M')
-		st.metric('', f'${entry_equity/1_000_000:.1f}M')
-		st.metric('', f'${entry_fees/1_000_000:.1f}M')
-		st.metric('', f'{return_multiple:.1f}x')
-		st.metric('', f'{irr:.1f}%')
-		st.metric('', f'{revenue_cagr:.1f}%')
-		st.metric('', f'${revenue_growth/1_000_000:.1f}M')
+		st.markdown(f'${starting_revenue/1_000_000:.1f}M')
+		st.markdown(f'${projected_ebitda[0]/1_000_000:.1f}M')
+		st.markdown(f'{ebitda_margins[0]*100:.1f}%')
+		st.markdown(f'${entry_ev/1_000_000:.1f}M')
+		st.markdown(f'{entry_ev_revenue:.1f}x')
+		st.markdown(f'{ev_ebitda_multiple:.1f}x')
+		st.markdown(f'${net_debt_entry/1_000_000:.1f}M')
+		st.markdown(f'${entry_equity/1_000_000:.1f}M')
+		st.markdown(f'${entry_fees/1_000_000:.1f}M')
+		st.markdown(f'{return_multiple:.1f}x')
+		st.markdown(f'{irr:.1f}%')
+		st.markdown(f'{revenue_cagr:.1f}%')
+		st.markdown(f'${revenue_growth/1_000_000:.1f}M')
 	
 	with col3:
 		st.markdown('### Exit')
-		st.metric('', f'${projected_revenue[-1]/1_000_000:.1f}M')
-		st.metric('', f'${projected_ebitda[-1]/1_000_000:.1f}M')
-		st.metric('', f'{ebitda_margins[-1]*100:.1f}%')
-		st.metric('', f'${exit_ev/1_000_000:.1f}M')
-		st.metric('', f'{exit_ev_revenue:.1f}x')
-		st.metric('', f'{exit_multiple:.1f}x')
-		st.metric('', f'${net_debt_exit/1_000_000:.1f}M')
-		st.metric('', f'${exit_equity/1_000_000:.1f}M')
-		st.metric('', f'${exit_fees/1_000_000:.1f}M')
-		st.metric('', f'{return_multiple:.1f}x')
-		st.metric('', f'{irr:.1f}%')
-		st.metric('', f'{ebitda_cagr:.1f}%')
-		st.metric('', f'${ebitda_growth/1_000_000:.1f}M')
+		st.markdown(f'${projected_revenue[-1]/1_000_000:.1f}M')
+		st.markdown(f'${projected_ebitda[-1]/1_000_000:.1f}M')
+		st.markdown(f'{ebitda_margins[-1]*100:.1f}%')
+		st.markdown(f'${exit_ev/1_000_000:.1f}M')
+		st.markdown(f'{exit_ev_revenue:.1f}x')
+		st.markdown(f'{exit_multiple:.1f}x')
+		st.markdown(f'${net_debt_exit/1_000_000:.1f}M')
+		st.markdown(f'${exit_equity/1_000_000:.1f}M')
+		st.markdown(f'${exit_fees/1_000_000:.1f}M')
+		st.markdown(f'{return_multiple:.1f}x')
+		st.markdown(f'{irr:.1f}%')
+		st.markdown(f'{ebitda_cagr:.1f}%')
+		st.markdown(f'${ebitda_growth/1_000_000:.1f}M')
 	
 	st.markdown('---')
 	
