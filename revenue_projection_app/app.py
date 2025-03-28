@@ -19,9 +19,8 @@ st.markdown("""
 		padding: 2rem;
 	}
 	.stMetric {
-		background-color: #f0f2f6;
+		background-color: transparent;
 		padding: 0.25rem;
-		border-radius: 0.25rem;
 		margin-bottom: 0.25rem;
 		font-size: 0.875rem;
 		height: 1.5rem;
@@ -29,28 +28,84 @@ st.markdown("""
 		align-items: center;
 	}
 	.stMetric:hover {
-		background-color: #e6e9ef;
+		background-color: transparent;
 	}
 	.stSubheader {
 		font-size: 1rem;
 		font-weight: 600;
 		color: #1f1f1f;
-		margin-bottom: 0.25rem;
+		margin-bottom: 0.5rem;
 		padding-bottom: 0.25rem;
 		border-bottom: 1px solid #e6e9ef;
 	}
 	.stMarkdown {
 		font-size: 0.875rem;
-		background-color: #f0f2f6;
+	}
+	/* Style for metric values */
+	.stMarkdown p {
+		margin: 0;
 		padding: 0.25rem;
-		border-radius: 0.25rem;
-		margin-bottom: 0.25rem;
 		height: 1.5rem;
 		display: flex;
 		align-items: center;
 	}
-	.stMarkdown:hover {
-		background-color: #e6e9ef;
+	/* Style for metric headers */
+	.stMarkdown h3 {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #1f1f1f;
+		margin-bottom: 0.5rem;
+		padding-bottom: 0.25rem;
+		border-bottom: 1px solid #e6e9ef;
+	}
+	/* Style for dividers */
+	hr {
+		margin: 1rem 0;
+		border: none;
+		border-top: 1px solid #e6e9ef;
+	}
+	/* Style for charts */
+	.js-plotly-plot {
+		background-color: white !important;
+	}
+	/* Style for dataframe */
+	.dataframe {
+		background-color: white;
+		border: 1px solid #e6e9ef;
+		border-radius: 0.5rem;
+		padding: 1rem;
+	}
+	/* Style for sidebar */
+	.css-1d391kg {
+		background-color: #f8f9fa;
+		padding: 1rem;
+	}
+	/* Style for number inputs */
+	.stNumberInput input {
+		background-color: white;
+		border: 1px solid #e6e9ef;
+		border-radius: 0.25rem;
+		padding: 0.25rem;
+	}
+	/* Style for headers */
+	h1 {
+		color: #1f1f1f;
+		font-weight: 600;
+		margin-bottom: 1rem;
+	}
+	/* Style for error messages */
+	.stAlert {
+		background-color: #fff5f5;
+		border: 1px solid #feb2b2;
+		border-radius: 0.5rem;
+		padding: 1rem;
+	}
+	/* Style for info messages */
+	.stInfo {
+		background-color: #f0f9ff;
+		border: 1px solid #bae6fd;
+		border-radius: 0.5rem;
+		padding: 1rem;
 	}
 	</style>
 """, unsafe_allow_html=True)
@@ -256,35 +311,35 @@ try:
 	
 	with col2:
 		st.markdown('### Entry')
-		st.markdown(f'${starting_revenue/1_000_000:.1f}M')
-		st.markdown(f'${projected_ebitda[0]/1_000_000:.1f}M')
-		st.markdown(f'{ebitda_margins[0]*100:.1f}%')
-		st.markdown(f'${entry_ev/1_000_000:.1f}M')
-		st.markdown(f'{entry_ev_revenue:.1f}x')
-		st.markdown(f'{ev_ebitda_multiple:.1f}x')
-		st.markdown(f'${net_debt_entry/1_000_000:.1f}M')
-		st.markdown(f'${entry_equity/1_000_000:.1f}M')
-		st.markdown(f'${entry_fees/1_000_000:.1f}M')
-		st.markdown(f'{return_multiple:.1f}x')
-		st.markdown(f'{irr:.1f}%')
-		st.markdown(f'{revenue_cagr:.1f}%')
-		st.markdown(f'${revenue_growth/1_000_000:.1f}M')
+		st.metric('', f'${starting_revenue/1_000_000:.1f}M')
+		st.metric('', f'${projected_ebitda[0]/1_000_000:.1f}M')
+		st.metric('', f'{ebitda_margins[0]*100:.1f}%')
+		st.metric('', f'${entry_ev/1_000_000:.1f}M')
+		st.metric('', f'{entry_ev_revenue:.1f}x')
+		st.metric('', f'{ev_ebitda_multiple:.1f}x')
+		st.metric('', f'${net_debt_entry/1_000_000:.1f}M')
+		st.metric('', f'${entry_equity/1_000_000:.1f}M')
+		st.metric('', f'${entry_fees/1_000_000:.1f}M')
+		st.metric('', f'{return_multiple:.1f}x')
+		st.metric('', f'{irr:.1f}%')
+		st.metric('', f'{revenue_cagr:.1f}%')
+		st.metric('', f'${revenue_growth/1_000_000:.1f}M')
 	
 	with col3:
 		st.markdown('### Exit')
-		st.markdown(f'${projected_revenue[-1]/1_000_000:.1f}M')
-		st.markdown(f'${projected_ebitda[-1]/1_000_000:.1f}M')
-		st.markdown(f'{ebitda_margins[-1]*100:.1f}%')
-		st.markdown(f'${exit_ev/1_000_000:.1f}M')
-		st.markdown(f'{exit_ev_revenue:.1f}x')
-		st.markdown(f'{exit_multiple:.1f}x')
-		st.markdown(f'${net_debt_exit/1_000_000:.1f}M')
-		st.markdown(f'${exit_equity/1_000_000:.1f}M')
-		st.markdown(f'${exit_fees/1_000_000:.1f}M')
-		st.markdown(f'{return_multiple:.1f}x')
-		st.markdown(f'{irr:.1f}%')
-		st.markdown(f'{ebitda_cagr:.1f}%')
-		st.markdown(f'${ebitda_growth/1_000_000:.1f}M')
+		st.metric('', f'${projected_revenue[-1]/1_000_000:.1f}M')
+		st.metric('', f'${projected_ebitda[-1]/1_000_000:.1f}M')
+		st.metric('', f'{ebitda_margins[-1]*100:.1f}%')
+		st.metric('', f'${exit_ev/1_000_000:.1f}M')
+		st.metric('', f'{exit_ev_revenue:.1f}x')
+		st.metric('', f'{exit_multiple:.1f}x')
+		st.metric('', f'${net_debt_exit/1_000_000:.1f}M')
+		st.metric('', f'${exit_equity/1_000_000:.1f}M')
+		st.metric('', f'${exit_fees/1_000_000:.1f}M')
+		st.metric('', f'{return_multiple:.1f}x')
+		st.metric('', f'{irr:.1f}%')
+		st.metric('', f'{ebitda_cagr:.1f}%')
+		st.metric('', f'${ebitda_growth/1_000_000:.1f}M')
 	
 	st.markdown('---')
 	
