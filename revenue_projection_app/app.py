@@ -16,7 +16,7 @@ st.set_page_config(
 st.markdown("""
 	<style>
 	.main {
-		padding: 2rem;
+		padding: 1rem;
 	}
 	.stMetric {
 		background-color: #f8f9fa;
@@ -47,10 +47,10 @@ st.markdown("""
 	/* Style for metric values */
 	.stMarkdown p {
 		margin: 0;
-		padding: 0.25rem;
-		height: 1.5rem;
-		min-height: 1.5rem;
-		max-height: 1.5rem;
+		padding: 0.125rem;
+		height: 1.25rem;
+		min-height: 1.25rem;
+		max-height: 1.25rem;
 		display: flex;
 		align-items: center;
 		font-size: 0.875rem;
@@ -62,13 +62,13 @@ st.markdown("""
 		font-size: 1rem;
 		font-weight: 600;
 		color: #1f1f1f;
-		margin-bottom: 0.5rem;
-		padding-bottom: 0.25rem;
+		margin-bottom: 0.25rem;
+		padding-bottom: 0.125rem;
 		border-bottom: 1px solid #e6e9ef;
 	}
 	/* Style for dividers */
 	hr {
-		margin: 0.25rem 0;
+		margin: 0.125rem 0;
 		border: none;
 		border-top: 1px solid #e6e9ef;
 	}
