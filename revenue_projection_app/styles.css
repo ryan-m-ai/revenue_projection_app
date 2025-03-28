@@ -2,14 +2,10 @@
 	padding: 1rem;
 }
 
-.stMarkdown {
-	font-size: 0.875rem;
-}
-
 /* Style for metric values */
 .stMarkdown p {
 	margin: 0;
-	padding: 0.125rem;
+	padding: 0.25rem;
 	height: 1.5rem;
 	min-height: 1.5rem;
 	max-height: 1.5rem;
@@ -25,22 +21,16 @@
 	font-size: 1rem;
 	font-weight: 600;
 	color: #1f1f1f;
-	margin-bottom: 0.25rem;
-	padding-bottom: 0.125rem;
+	margin-bottom: 0.5rem;
+	padding-bottom: 0.25rem;
 	border-bottom: 1px solid #e6e9ef;
-	height: 1.5rem;
-	display: flex;
-	align-items: center;
 }
 
 /* Style for dividers */
 hr {
-	margin: 0.125rem 0;
+	margin: 0.5rem 0;
 	border: none;
 	border-top: 1px solid #e6e9ef;
-	height: 1.5rem;
-	display: flex;
-	align-items: center;
 }
 
 /* Style for right-aligned columns */
